@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>F1 Lap Time Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #1c1c1c;
+        }
+
+        .navbar {
+            background-color: #111;
+            padding: 15px 40px;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .navbar span {
+            color: #e10600;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #e10600;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #111;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #e10600;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #f8f8f8;
+            border-left: 4px solid #e10600;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    Formula 1 <span>Lap Time Prediction</span>
+</div>
+
+<div class="container">
+
+    <h2>Race Simulation Input</h2>
+
+    <form action="/predict" method="post">
+
+        <div class="form-group">
+            <label>Year</label>
+            <input type="number" name="year" required>
+        </div>
+
+        <div class="form-group">
+            <label>Lap Number</label>
+            <input type="number" name="lap_number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Stint</label>
+            <input type="number" name="stint" required>
+        </div>
+
+        <div class="form-group">
+            <label>Tyre Life</label>
+            <input type="number" name="tyre_life" required>
+        </div>
+
+        <div class="form-group">
+            <label>Fresh Tyre (0 or 1)</label>
+            <input type="number" name="fresh_tyre" required>
+        </div>
+
+        <div class="form-group">
+            <label>Position</label>
+            <input type="number" name="position" required>
+        </div>
+
+        <div class="form-group">
+            <label>Compound</label>
+            <input type="text" name="compound" placeholder="SOFT / MEDIUM / HARD" required>
+        </div>
+
+        <div class="form-group">
+            <label>Team</label>
+            <input type="text" name="team" required>
+        </div>
+
+        <div class="form-group">
+            <label>Driver</label>
+            <input type="text" name="driver" required>
+        </div>
+
+        <button type="submit" class="btn">Predict Lap Time</button>
+
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+
+</div>
+
+<footer>
+    Flask + Hybrid ML Model | F1 Data Analytics Project
+</footer>
+
+</body>
+</html>
